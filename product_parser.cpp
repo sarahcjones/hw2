@@ -5,6 +5,8 @@
 #include "clothing.h"
 #include "movie.h"
 #include "util.h"
+#include "mydatastore.h"
+
 using namespace std;
 
 
@@ -130,7 +132,11 @@ std::string ProductBookParser::categoryID()
  */
 Product* ProductBookParser::makeProduct()
 {
-
+	Product * newBook = new Book("book", prodName_, price_, qty_, isbn_, author_);
+	// MyDataStore ds;
+	// ds.addProduct(newBook);
+	return newBook;
+	// Book(const std::string category, const std::string name, double price, int qty, std::string isbn, std::string author);
 
 }
 
@@ -185,9 +191,11 @@ std::string ProductClothingParser::categoryID()
  */
 Product* ProductClothingParser::makeProduct()
 {
-
-
-
+	Product * newClothing = new Clothing("clothing", prodName_, price_, qty_, size_, brand_);
+  // MyDataStore ds;
+	// ds.addProduct(newClothing);
+	return newClothing;
+	// Clothing(const std::string category, const std::string name, double price, int qty, std::string size, std::string brand);
 }
 
 
@@ -245,6 +253,8 @@ std::string ProductMovieParser::categoryID()
  */
 Product* ProductMovieParser::makeProduct()
 {
-
-
+	Product * newMovie = new Movie("movie", prodName_, price_, qty_, genre_, rating_);
+	// MyDataStore ds;
+	// ds.addProduct(newMovie);
+	return newMovie;
 }

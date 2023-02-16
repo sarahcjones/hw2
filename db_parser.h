@@ -7,6 +7,7 @@
 #include "product.h"
 #include "user.h"
 #include "product_parser.h"
+#include "mydatastore.h"
 
 /**
  * Interface for all section parsers_
@@ -22,7 +23,7 @@ public:
      * Sets errorMsg with a descriptive message upon an error
      * Returns true if an error occurred.
      */
-    virtual bool parse(std::istream& is, DataStore& ds,
+    virtual bool parse(std::istream& is, MyDataStore& ds,
                        int& lineno, std::string& errorMsg) = 0;
     /**
      * Reports how many items were parsed
@@ -51,7 +52,7 @@ public:
      *  when a section with sectionName is found in the
      *  database. Returns true if an error occurs.
      */
-    bool parse(std::string db_filename, DataStore& ds);
+    bool parse(std::string db_filename, MyDataStore& ds);
 
 private:
     enum PState { FIND_SECTION, IN_SECTION };
@@ -72,7 +73,7 @@ class ProductSectionParser : public SectionParser
 public:
     ProductSectionParser();
     ~ProductSectionParser();
-    virtual bool parse(std::istream& is, DataStore& ds,
+    virtual bool parse(std::istream& is, MyDataStore& ds,
                        int& lineno, std::string& errorMsg);
     virtual void reportItemsRead(std::ostream& os);
     void addProductParser(ProductParser* p);
@@ -94,13 +95,13 @@ class UserSectionParser : public SectionParser
 public:
     UserSectionParser();
     ~UserSectionParser() {}
-    virtual bool parse(std::istream& is, DataStore& ds,
+    virtual bool parse(std::istream& is, MyDataStore& ds,
                        int& lineno, std::string& errorMsg);
     virtual void reportItemsRead(std::ostream& os);
 protected:
     User* parseUser(
         std::istream& is,
-        DataStore& ds,
+        MyDataStore& ds,
         std::string& errorMsg);
 private:
 
